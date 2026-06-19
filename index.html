@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Business Intelligence Agent</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+    theme: {
+        extend: {
+        colors: {
+            bg: '#050816',
+            card: '#0B1220',
+            accent: '#00E5FF',
+            'accent-dim': '#00E5FF33',
+            border: '#1E293B',
+            muted: '#64748B',
+            'muted-light': '#94A3B8',
+        },
+        fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+        },
+        animation: {
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'shimmer': 'shimmer 2s linear infinite',
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'slide-up': 'slideUp 0.5s ease-out forwards',
+            'glow': 'glow 2s ease-in-out infinite alternate',
+        },
+        keyframes: {
+            shimmer: {
+            '0%': { backgroundPosition: '-200% 0' },
+            '100%': { backgroundPosition: '200% 0' },
+            },
+            fadeIn: {
+            '0%': { opacity: '0' },
+            '100%': { opacity: '1' },
+            },
+            slideUp: {
+            '0%': { opacity: '0', transform: 'translateY(16px)' },
+            '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            glow: {
+            '0%': { boxShadow: '0 0 20px rgba(0, 229, 255, 0.15)' },
+            '100%': { boxShadow: '0 0 40px rgba(0, 229, 255, 0.35)' },
+            },
+        },
+        },
+    },
+    };
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body class="min-h-screen overflow-x-hidden">
+
+<!-- Ambient orbs -->
+<div class="orb w-96 h-96 bg-accent/5 top-0 left-1/4 -translate-x-1/2 fixed"></div>
+<div class="orb w-80 h-80 bg-blue-500/5 top-1/3 right-0 fixed"></div>
+<div class="orb w-64 h-64 bg-accent/3 bottom-0 left-1/3 fixed"></div>
+
+<!-- Navigation -->
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-accent/10 border border-accent/30 flex items-center justify-center logo-icon">
+        <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+        </svg>
+        </div>
+        <span class="font-semibold text-white tracking-tight">IntelliAgent</span>
+    </div>
+    <div class="hidden md:flex items-center gap-8 text-sm text-muted-light">
+        <a href="#hero" class="hover:text-accent transition-colors">Home</a>
+        <a href="#search" class="hover:text-accent transition-colors">Analyze</a>
+        <a href="#" onclick="alert('Beta features coming soon!')" class="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium border border-accent/20 hover:bg-accent/20 transition-colors cursor-pointer">Beta</a>
+    </div>
+    </div>
+</nav>
+
+<!-- ===================== HERO SECTION ===================== -->
+<section id="hero" class="relative pt-32 pb-20 px-6 grid-bg">
+    <div class="max-w-4xl mx-auto text-center">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill text-xs text-muted-light mb-8 animate-fade-in">
+        <span class="accent-dot"></span>
+        Powered by Multi-Agent AI Research
+    </div>
+
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight mb-6 animate-slide-up">
+        <span class="gradient-text">AI Business Intelligence</span><br />
+        <span class="text-white">Agent</span>
+    </h1>
+
+    <p class="text-lg sm:text-xl text-muted-light max-w-2xl mx-auto leading-relaxed mb-10 animate-slide-up" style="animation-delay: 0.1s">
+        Transform company research into actionable AI opportunities
+    </p>
+
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-slide-up" style="animation-delay: 0.2s">
+        <a href="#search" class="btn-primary inline-flex items-center gap-2 px-6 py-3 rounded-xl text-bg font-semibold text-sm">
+        Get Started
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+        </a>
+
+    </div>
+
+    <!-- Feature pills -->
+    <div class="mt-16 flex flex-wrap justify-center gap-3 animate-fade-in" style="animation-delay: 0.4s">
+        <span class="feature-pill">6 Specialized Agents</span>
+        <span class="feature-pill">Real-time Research</span>
+        <span class="feature-pill">CEO-Ready Pitch</span>
+        <span class="feature-pill">AI Roadmap</span>
+    </div>
+    </div>
+</section>
+
+<!-- ===================== SEARCH SECTION ===================== -->
+<section id="search" class="relative py-16 px-6">
+    <div class="max-w-2xl mx-auto">
+    <div class="gradient-border p-8 sm:p-10">
+        <div class="relative z-10">
+        <div class="flex items-center gap-3 mb-6">
+            <div class="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center">
+            <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            </div>
+            <div>
+            <h2 class="text-lg font-semibold text-white">Company Analysis</h2>
+            <p class="text-sm text-muted">Enter a company name to generate a full AI intelligence report</p>
+            </div>
+        </div>
+
+        <form id="searchForm" class="space-y-4">
+            <div>
+            <label for="companyInput" class="block text-sm font-medium text-muted-light mb-2">Company Name</label>
+            <input
+                type="text"
+                id="companyInput"
+                name="company"
+                placeholder="e.g. Stripe, Shopify, Tesla..."
+                autocomplete="organization"
+                required
+                class="search-input w-full px-4 py-3.5 rounded-xl bg-bg border border-border text-white placeholder-muted focus:outline-none focus:border-accent/50 transition-all text-sm"
+            />
+            </div>
+            <button
+            type="submit"
+            id="generateBtn"
+            class="btn-primary w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-bg font-semibold text-sm"
+            >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+            Generate Report
+            </button>
+        </form>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- ===================== LOADING SCREEN ===================== -->
+<section id="loadingScreen" class="section-hidden relative py-16 px-6">
+    <div class="max-w-xl mx-auto">
+    <div class="gradient-border p-8 sm:p-10 animate-glow">
+        <div class="relative z-10">
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 border border-accent/30 mb-4">
+            <svg class="w-7 h-7 text-accent animate-spin" style="animation-duration: 3s" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            </div>
+            <h2 class="text-xl font-semibold text-white mb-1">Analyzing Company</h2>
+            <p id="loadingCompanyName" class="text-accent font-medium text-sm"></p>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="mb-8">
+            <div class="flex justify-between text-xs text-muted mb-2">
+            <span>Progress</span>
+            <span id="progressPercent" class="text-accent font-mono">0%</span>
+            </div>
+            <div class="h-1.5 rounded-full bg-bg overflow-hidden">
+            <div id="progressBar" class="progress-bar-fill h-full rounded-full bg-gradient-to-r from-accent/60 to-accent" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Agent steps -->
+        <div id="agentSteps" class="space-y-3">
+            <div class="agent-step flex items-center gap-4 p-3 rounded-xl border border-transparent transition-all" data-agent="research">
+            <div class="step-icon w-10 h-10 rounded-xl border border-border flex items-center justify-center shrink-0 transition-all">
+                <div class="step-spinner items-center justify-center">
+                <svg class="w-4 h-4 animate-spin text-accent" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                </div>
+                <div class="step-check hidden items-center justify-center">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+                </div>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Research Agent</p>
+                <p class="text-xs text-muted truncate">Gathering company data & market intelligence</p>
+            </div>
+            </div>
+
+            <div class="agent-step flex items-center gap-4 p-3 rounded-xl border border-transparent transition-all" data-agent="business">
+            <div class="step-icon w-10 h-10 rounded-xl border border-border flex items-center justify-center shrink-0 transition-all">
+                <div class="step-spinner items-center justify-center">
+                <svg class="w-4 h-4 animate-spin text-accent" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                </div>
+                <div class="step-check hidden items-center justify-center">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+                </div>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Business Agent</p>
+                <p class="text-xs text-muted truncate">Analyzing business model & revenue streams</p>
+            </div>
+            </div>
+
+            <div class="agent-step flex items-center gap-4 p-3 rounded-xl border border-transparent transition-all" data-agent="challenge">
+            <div class="step-icon w-10 h-10 rounded-xl border border-border flex items-center justify-center shrink-0 transition-all">
+                <div class="step-spinner items-center justify-center">
+                <svg class="w-4 h-4 animate-spin text-accent" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                </div>
+                <div class="step-check hidden items-center justify-center">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+                </div>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Challenge Agent</p>
+                <p class="text-xs text-muted truncate">Identifying operational & strategic challenges</p>
+            </div>
+            </div>
+
+            <div class="agent-step flex items-center gap-4 p-3 rounded-xl border border-transparent transition-all" data-agent="opportunity">
+            <div class="step-icon w-10 h-10 rounded-xl border border-border flex items-center justify-center shrink-0 transition-all">
+                <div class="step-spinner items-center justify-center">
+                <svg class="w-4 h-4 animate-spin text-accent" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                </div>
+                <div class="step-check hidden items-center justify-center">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+                </div>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">AI Opportunity Agent</p>
+                <p class="text-xs text-muted truncate">Mapping AI use cases & impact potential</p>
+            </div>
+            </div>
+
+            <div class="agent-step flex items-center gap-4 p-3 rounded-xl border border-transparent transition-all" data-agent="roadmap">
+            <div class="step-icon w-10 h-10 rounded-xl border border-border flex items-center justify-center shrink-0 transition-all">
+                <div class="step-spinner items-center justify-center">
+                <svg class="w-4 h-4 animate-spin text-accent" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                </div>
+                <div class="step-check hidden items-center justify-center">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+                </div>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">Roadmap Agent</p>
+                <p class="text-xs text-muted truncate">Building phased implementation timeline</p>
+            </div>
+            </div>
+
+            <div class="agent-step flex items-center gap-4 p-3 rounded-xl border border-transparent transition-all" data-agent="pitch">
+            <div class="step-icon w-10 h-10 rounded-xl border border-border flex items-center justify-center shrink-0 transition-all">
+                <div class="step-spinner items-center justify-center">
+                <svg class="w-4 h-4 animate-spin text-accent" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path>
+                </svg>
+                </div>
+                <div class="step-check hidden items-center justify-center">
+                <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+                </div>
+            </div>
+            <div class="flex-1 min-w-0">
+                <p class="text-sm font-medium text-white">CEO Pitch Agent</p>
+                <p class="text-xs text-muted truncate">Crafting executive summary & pitch deck</p>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<!-- ===================== RESULTS DASHBOARD ===================== -->
+<section id="resultsDashboard" class="section-hidden relative py-16 px-6 pb-24">
+    <div class="max-w-6xl mx-auto">
+
+    <!-- Dashboard header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+        <div>
+        <p class="text-xs text-accent font-medium uppercase tracking-wider mb-1">Intelligence Report</p>
+        <h2 id="reportCompanyName" class="text-2xl sm:text-3xl font-bold text-white"></h2>
+        <p id="reportTimestamp" class="text-sm text-muted mt-1"></p>
+        </div>
+        <button
+        id="newReportBtn"
+        type="button"
+        class="btn-ghost"
+        >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        New Report
+        </button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="mb-6 tab-nav-scroll">
+        <div id="tabNav" class="flex gap-2 min-w-max pb-1">
+        <button class="tab-btn active px-4 py-2 rounded-lg text-sm font-medium border border-transparent text-muted-light transition-all" data-tab="overview">Overview</button>
+        <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium border border-transparent text-muted-light transition-all" data-tab="business">Business Information</button>
+        <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium border border-transparent text-muted-light transition-all" data-tab="challenges">Challenges</button>
+        <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium border border-transparent text-muted-light transition-all" data-tab="opportunities">AI Opportunities</button>
+        <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium border border-transparent text-muted-light transition-all" data-tab="roadmap">Roadmap</button>
+        <button class="tab-btn px-4 py-2 rounded-lg text-sm font-medium border border-transparent text-muted-light transition-all" data-tab="pitch">CEO Pitch</button>
+        </div>
+    </div>
+
+    <!-- Tab panels -->
+    <div id="tabPanels">
+
+        <!-- Overview -->
+        <div class="tab-panel active" data-panel="overview">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            <div class="stat-card gradient-border p-5 flex flex-col justify-between h-full">
+            <div class="relative z-10 flex flex-col flex-1">
+                <p class="text-xs text-muted uppercase tracking-wider mb-2">AI Readiness</p>
+                <div class="flex-1 flex items-center">
+                  <p id="statReadiness" class="text-3xl font-bold text-accent">—</p>
+                </div>
+                <p class="text-xs text-muted-light mt-2">Score out of 100</p>
+            </div>
+            </div>
+            <div class="stat-card gradient-border p-5 flex flex-col justify-between h-full">
+            <div class="relative z-10 flex flex-col flex-1">
+                <p class="text-xs text-muted uppercase tracking-wider mb-2">Opportunities</p>
+                <div class="flex-1 flex items-center">
+                  <p id="statOpportunities" class="text-3xl font-bold text-white">—</p>
+                </div>
+                <p class="text-xs text-muted-light mt-2">Identified use cases</p>
+            </div>
+            </div>
+            <div class="stat-card gradient-border p-5 flex flex-col justify-between h-full">
+            <div class="relative z-10 flex flex-col flex-1">
+                <p class="text-xs text-muted uppercase tracking-wider mb-2">Challenges</p>
+                <div class="flex-1 flex items-center">
+                  <p id="statChallenges" class="text-3xl font-bold text-white">—</p>
+                </div>
+                <p class="text-xs text-muted-light mt-2">Key pain points</p>
+            </div>
+            </div>
+            <div class="stat-card gradient-border p-5 flex flex-col justify-between h-full">
+            <div class="relative z-10 flex flex-col flex-1">
+                <p class="text-xs text-muted uppercase tracking-wider mb-2">ROI Potential</p>
+                <div class="flex-1 flex items-center">
+                  <p id="statROI" class="text-2xl sm:text-3xl font-bold text-accent line-clamp-2 overflow-hidden break-words leading-tight">—</p>
+                </div>
+                <p class="text-xs text-muted-light mt-2">Estimated annual savings</p>
+            </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="gradient-border p-6">
+            <div class="relative z-10">
+                <h3 class="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-accent"></span>
+                Executive Summary
+                </h3>
+                <p id="overviewSummary" class="text-sm text-muted-light leading-relaxed"></p>
+            </div>
+            </div>
+            <div class="gradient-border p-6">
+            <div class="relative z-10">
+                <h3 class="text-sm font-semibold text-white mb-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-accent"></span>
+                Top AI Recommendations
+                </h3>
+                <ul id="overviewRecommendations" class="space-y-3"></ul>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Business Information -->
+        <div class="tab-panel" data-panel="business">
+        <div class="gradient-border p-6 sm:p-8">
+            <div class="relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div>
+                <h3 class="text-xs text-muted uppercase tracking-wider mb-4">Company Profile</h3>
+                <dl id="businessProfile" class="space-y-4"></dl>
+                </div>
+                <div>
+                <h3 class="text-xs text-muted uppercase tracking-wider mb-4">Market Position</h3>
+                <dl id="businessMarket" class="space-y-4"></dl>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-xs text-muted uppercase tracking-wider mb-4">Business Description</h3>
+                <p id="businessDescription" class="text-sm text-muted-light leading-relaxed"></p>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Challenges -->
+        <div class="tab-panel" data-panel="challenges">
+        <div id="challengesList" class="space-y-4"></div>
+        </div>
+
+        <!-- AI Opportunities -->
+        <div class="tab-panel" data-panel="opportunities">
+        <div id="opportunitiesList" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+
+        <!-- Roadmap -->
+        <div class="tab-panel" data-panel="roadmap">
+        <div class="gradient-border p-6 sm:p-8">
+            <div class="relative z-10">
+            <h3 class="text-sm font-semibold text-white mb-8">Implementation Roadmap</h3>
+            <div id="roadmapTimeline" class="relative pl-8 space-y-8"></div>
+            </div>
+        </div>
+        </div>
+
+        <!-- CEO Pitch -->
+        <div class="tab-panel" data-panel="pitch">
+        <div class="gradient-border p-6 sm:p-8">
+            <div class="relative z-10 space-y-8">
+            <div>
+                <p class="text-xs text-accent uppercase tracking-wider mb-2">Executive Pitch</p>
+                <h3 id="pitchHeadline" class="text-xl sm:text-2xl font-bold text-white leading-snug"></h3>
+            </div>
+            <div id="pitchSections" class="space-y-6"></div>
+            <div class="pitch-cta">
+                <p class="text-xs text-accent font-medium uppercase tracking-wider mb-2">Call to Action</p>
+                <p id="pitchCTA" class="text-sm text-muted-light leading-relaxed"></p>
+            </div>
+            </div>
+        </div>
+        </div>
+
+    </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
+    <span>&copy; 2026 IntelliAgent. All rights reserved.</span>
+    <span>Built for AI Business Intelligence Assessment</span>
+    </div>
+</footer>
+
+<script src="script.js" defer></script>
+</body>
+</html>
