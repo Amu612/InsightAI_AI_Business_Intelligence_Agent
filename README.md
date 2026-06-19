@@ -1,32 +1,78 @@
-# AI Business Intelligence Agent - IntelliAgent
+# 🚀 IntelliAgent: AI Business Intelligence Platform
 
-## 1. Approach
+IntelliAgent is a dynamic, multi-agent business intelligence platform powered by **Google Gemini 2.5 Flash**. It takes a company's name and autonomously researches, analyzes, and generates a comprehensive intelligence dashboard—including AI readiness, operational challenges, actionable AI opportunities, a strategic roadmap, and a CEO-ready pitch.
 
-The objective of this project is to build an intelligent, multi-agent AI system capable of generating dynamic, comprehensive business intelligence reports for any company using just its name. The approach focuses on leveraging state-of-the-art Large Language Models (LLMs) to dynamically extract, analyze, and structure real-world company data. Instead of relying on static datasets, we used the Gemini 2.5 Flash model with heavily structured prompt engineering to dynamically generate an overview, challenges, AI opportunities, a strategic roadmap, and a CEO pitch.
+## ✨ Features
 
-## 2. Architecture
+- **Multi-Agent Simulation:** Visual workflow simulating 6 specialized agents (Research, Business, Challenge, Opportunity, Roadmap, Pitch).
+- **Dynamic AI Generation:** Zero hardcoded data. The Gemini LLM dynamically assesses the specific company and generates tailored, structured JSON insights.
+- **Opportunity Matrix:** Automatically graphs identified AI opportunities on a 2x2 matrix (Impact vs. Effort).
+- **Executive Pitch Deck:** Generates a concise, high-impact CEO pitch with specific recommendations and a clear call to action.
+- **Modern UI:** Built with TailwindCSS, featuring a dark-mode glassmorphism aesthetic, responsive layouts, and fluid micro-animations.
 
-The architecture is divided into two primary layers:
+## 🛠️ Tech Stack
 
-- **Frontend Layer:** A modern, responsive UI built with Vanilla HTML, CSS, and JavaScript. It uses TailwindCSS for rapid, utility-first styling. The UI simulates a complex multi-agent execution flow using a smooth polling/animation mechanism before rendering the final intelligence dashboard.
-- **Backend / API Layer:** A lightweight Express.js Node server (acting as a local proxy for Serverless functionality) that handles secure API communications. The `/api/analyze` endpoint intercepts frontend requests, secures the `GEMINI_API_KEY`, and dispatches a heavily structured, system-instructed prompt to the Google Gemini API. It handles JSON parsing, error resilience, and returns a robust, 100% dynamic JSON payload back to the client.
+- **Frontend:** HTML5, Vanilla JavaScript, TailwindCSS
+- **Backend / API:** Node.js, Express.js (for local development), Serverless Functions (for Vercel deployment)
+- **AI Model:** Google Gemini 2.5 Flash API
 
-## 3. AI Tools Used
+## 🚀 Getting Started (Local Development)
 
-- **ChatGPT & Claude:** Used for initial brainstorming, prompt engineering techniques, and structuring the business intelligence output requirements.
-- **Cursor:** Leveraged as the primary AI-powered code editor to accelerate frontend development and component styling.
-- **Gemini (Google):** The core intelligence engine powering the backend. Used specifically (Gemini 2.5 Flash) to generate the dynamic business reports via API.
-- **Antigravity:** Used for autonomous debugging, fixing environment-specific server issues, rewriting server code, and refining prompt structures dynamically.
-- **Perplexity:** Utilized for rapid research and fact-checking market data concepts to inform the prompt design.
+### Prerequisites
+- Node.js (v18 or higher)
+- A Google Gemini API Key
 
-## 4. Challenges Faced
+### Installation
 
-- **Path and Environment Issues:** Encountered issues with the Vercel CLI development server crashing due to space characters in the Windows directory path (`Cannot find module...`), resulting in environment variables failing to load.
-- **Static/Mocked Data Generation:** Initially, the LLM prompt's JSON template contained hardcoded values (e.g., `aiReadiness: 80`, `impact: High`). The model ended up copying these placeholder values instead of generating dynamic, company-specific intelligence, leading to identical numbers for every company. Furthermore, the `agentTrace` logs were originally hardcoded on the backend.
-- **JSON Formatting Instability:** The Gemini API would sometimes wrap responses in markdown blocks or return slightly malformed JSON, breaking the frontend rendering.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/insight-ai.git
+   cd insight-ai
+   ```
 
-## 5. How Challenges Were Solved
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-- **Server Rewrite:** Bypassed the Vercel CLI space bug by creating a native `server.js` Express backend that manually loads `.env` variables using `dotenv` and handles the API requests smoothly on local environments without crashing.
-- **Dynamic Prompt Engineering:** Re-engineered the prompt in `api/analyze.js` by removing all hardcoded numbers and strings from the JSON template (replacing them with `0` or `""`). Added a critical system directive forcing the model to generate completely unique, highly specific data for all fields, including the `agentTrace` logs.
-- **Robust JSON Parsing:** Implemented a `parseGeminiJSON` utility in the backend that aggressively strips out markdown wrappers (e.g., ```json) and applies regex-based repairs to trailing commas, ensuring the frontend always receives clean, valid JSON.
+3. **Configure Environment Variables:**
+   Create a `.env.local` file in the root directory and add your Gemini API key:
+   ```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+
+4. **Run the local development server:**
+   ```bash
+   npm start
+   ```
+   *Note: We use a custom local Express server (`local-server.js`) to seamlessly test the API endpoints and bypass Windows pathing issues with the Vercel CLI.*
+
+5. **Open the app:**
+   Visit `http://localhost:3000` in your browser.
+
+## 🌐 Deployment (Vercel)
+
+This project is fully optimized for zero-config deployment on Vercel.
+
+1. Push your code to GitHub.
+2. Import the repository into your Vercel dashboard.
+3. In the **Environment Variables** section of Vercel, add your `GEMINI_API_KEY`.
+4. Click **Deploy**. Vercel will automatically serve the static frontend and map `api/analyze.js` as a Serverless Function.
+
+## 🧠 Approach & Architecture
+
+The architecture relies heavily on **Prompt Engineering** and **JSON structured generation**. 
+Instead of a standard conversational wrapper, the backend dispatches a highly specific prompt to Gemini containing an empty JSON template structure. The LLM acts as an enterprise architect, populating the JSON with custom analysis. This structured data is then securely returned to the frontend where it is normalized and rendered into interactive dashboard components.
+
+## 🏆 Assessment & Challenges Solved
+
+- **Preventing AI Hallucinations & Static Data:** Initially, the LLM relied on placeholder values from the JSON template (returning exactly "80" for AI Readiness every time). We resolved this by explicitly stripping the template of hardcoded values and introducing critical system directives that force completely unique, company-specific generation.
+- **Vercel CLI Pathing Issues:** Encountered an issue where Vercel CLI crashed locally on Windows due to space characters in the path. Solved by writing a native Express backend (`local-server.js`) to handle local development smoothly.
+- **Vercel Deployment Routing Conflicts:** When deployed to Vercel, having a `server.js` file in the root confused Vercel's zero-config builder into attempting to host a long-lived Express process, causing a `Cannot GET /` error instead of serving the static files. This was solved by renaming the file to `local-server.js` and updating `package.json`, allowing Vercel to cleanly serve the static frontend and the Serverless `api/analyze.js` function.
+- **Robust JSON Parsing:** The Gemini API occasionally wraps responses in Markdown code blocks. We implemented a resilient backend parser that aggressively cleanses the text, removes wrappers, and repairs trailing commas to ensure the UI always receives valid JSON.
+
+## 🤝 AI Tools Used
+- **ChatGPT & Claude:** Initial brainstorming, framework modeling (2x2 matrices), and prompt structure requirements.
+- **Cursor & Antigravity:** Rapid frontend styling, backend routing solutions, and autonomous debugging of local server environment issues.
+- **Perplexity:** Fact-checking market data concepts to inform prompt instructions.
+- **Gemini (Google):** The core intelligence engine powering the backend (Gemini 2.5 Flash).
