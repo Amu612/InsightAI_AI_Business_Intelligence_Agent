@@ -2,7 +2,7 @@
 
 IntelliAgent is a dynamic, multi-agent business intelligence platform powered by **Google Gemini 2.5 Flash**. It takes a company's name and autonomously researches, analyzes, and generates a comprehensive intelligence dashboard—including AI readiness, operational challenges, actionable AI opportunities, a strategic roadmap, and a CEO-ready pitch.
 
-Web App Link: insight-ai-ai-business-intelligence.vercel.app
+**Web App Link:** insight-ai-ai-business-intelligence.vercel.app
 
 ## ✨ Features
 
