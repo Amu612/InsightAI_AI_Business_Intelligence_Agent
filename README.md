@@ -59,31 +59,6 @@ Visualized through an interactive Impact vs Effort matrix.
    Smooth Animations
    Real-Time Agent Workflow Visualization
    
-🏗 System Architecture
-   User Input
-       │
-       ▼
-   Company Analysis Request
-       │
-       ▼
-   Google Gemini 2.5 Flash
-       │
-       ▼
-   Multi-Agent Processing
-       │
-    ┌──┼──────────────────┐
-    ▼  ▼                  ▼
-   Research Agent     Business Agent
-   Challenge Agent    Opportunity Agent
-   Roadmap Agent      Pitch Agent
-    └──┼──────────────────┘
-       │
-       ▼
-   Structured JSON Output
-       │
-       ▼
-   Interactive Dashboard
-
    
 🛠 Tech Stack
    Frontend
