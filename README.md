@@ -111,8 +111,6 @@ Install:
    Node.js 18+
    npm
    Google Gemini API Key
-   Clone Repository
-   git clone https://github.com/yourusername/insight-ai.git
    
    cd insight-ai
    Install Dependencies
